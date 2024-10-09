@@ -1,5 +1,8 @@
 import Hero from "./components/Hero/Hero";
 import Navbar from "./components/Navbar/Navbar";
+import connect from "./assets/connect-icon.png";
+import event from "./assets/event-icon.png";
+import Features from "./components/Features/Features";
 
 
 export default function App() {
@@ -14,25 +17,30 @@ export default function App() {
         <Navbar></Navbar>
         <Hero></Hero>
       </div>
+
       <div className="bg-[#212121]">
-        <div className="max-w-screen-xl mx-auto py-8 flex items-center justify-between text-white">
-          <p>
+        <div className="max-w-screen-xl mx-auto py-8 flex items-center gap-16 text-white">
+          <h4 className="text-2xl font-semibold w-1/2">
             "Powerful tool to manage your wedding, engage guests, and celebrate together effortlessly.".
-          </p>
-          <div>
-            <div>
-              <img src="" alt="" />
+          </h4>
+          <div className="flex w-1/2">
+            <div className="flex gap-4 items-center w-1/2">
+              <div className="bg-[#EB44B2] w-16 p-4 rounded-full">
+                <img src={connect} alt="" />
+              </div>
+              <p>Connect with <br /> your guests</p>
             </div>
-            <p>Connect with your guests</p>
-          </div>
-          <div>
-            <div>
-              <img src="" alt="" />
+            <div className="flex gap-4 items-center w-1/2">
+              <div className="bg-[#EB44B2] w-16 p-4 rounded-full">
+                <img src={event} alt="" />
+              </div>
+              <p>Easy event <br /> management</p>
             </div>
-            <p>Easy event management</p>
           </div>
         </div>
       </div>
+
+      <Features></Features>
     </div>
   )
 }
