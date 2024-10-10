@@ -5,11 +5,11 @@ import service4 from "../../assets/service4.png";
 
 export default function Features() {
     return (
-        <div className="py-12">
+        <div className="py-16">
             <h2 className="text-3xl text-center font-bold">Our Features</h2>
             <p className="text-center pb-12">"Easily create and manage your wedding events, from the ceremony to the <br /> reception.”</p>
             <div className="max-w-screen-xl mx-auto bg-[#212121] grid grid-cols-4 text-white">
-                <div className="space-y-4 px-6 pb-6 pt-24 hover:bg-pink-200 hover:text-black h-full">
+                <div className="space-y-4 px-6 pb-6 pt-24 hover:bg-pink-200 hover:text-black">
                     <div className="w-8">
                         <img src={service1} alt="" />
                     </div>

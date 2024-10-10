@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar/Navbar";
 import connect from "./assets/connect-icon.png";
 import event from "./assets/event-icon.png";
 import Features from "./components/Features/Features";
+import HowItWorks from "./components/HowItWorks/HowItWorks";
+import Pricing from "./components/Pricing/Pricing";
 
 
 export default function App() {
@@ -40,7 +42,9 @@ export default function App() {
         </div>
       </div>
 
-      <Features></Features>
+      <Features />
+      <HowItWorks />
+      <Pricing />
     </div>
   )
 }
