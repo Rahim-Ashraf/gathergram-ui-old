@@ -41,7 +41,7 @@ export default function Reviews() {
                     <SwiperSlide>
                         <Review bgUrl={"./assets/review-bg5.png"} name="Mia Ward" title="Fullstack Dev, Quotient" agency="Performance Marketing" />
                     </SwiperSlide>
-                    <div className='my-8'>
+                    <div className='pt-4'>
                         <button onClick={() => swiper.slidePrev()} className='btn btn-primary'>prev</button>
                         <button onClick={() => swiper.slideNext()} className='btn btn-primary'>next</button>
                     </div>

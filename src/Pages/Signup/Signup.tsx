@@ -32,12 +32,14 @@ export default function Signup() {
         axios.post("https://jellyfish-app-sjgrf.ondigitalocean.app/auth/register", data)
             .then(res => {
                 if (res.data) {
-                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("accessToken"); //it should add on logout button
                     localStorage.setItem("accessToken", res.data.data.accessToken);
-                    navigate("/");
+
                     Swal.fire({
                         title: `Welcome ${data.fullName}`,
                         confirmButtonText: "Go to Portal",
+                    }).then(() => {
+                        navigate("/");
                     });
                 }
             })

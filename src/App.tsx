@@ -6,6 +6,7 @@ import Features from "./components/Features/Features";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
 import Pricing from "./components/Pricing/Pricing";
 import Reviews from "./components/Reviews/Reviews";
+import Questions from "./components/Questions/Questions";
 
 
 export default function App() {
@@ -47,6 +48,7 @@ export default function App() {
       <HowItWorks />
       <Pricing />
       <Reviews />
+      <Questions></Questions>
     </div>
   )
 }

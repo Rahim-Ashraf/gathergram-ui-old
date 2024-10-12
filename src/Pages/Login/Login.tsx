@@ -34,14 +34,16 @@ export default function Login() {
         axios.post("https://jellyfish-app-sjgrf.ondigitalocean.app/auth/login", data)
             .then(res => {
                 if (res.data.data) {
-                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("accessToken"); //it should add on logout button
                     localStorage.setItem("accessToken", res.data.data.accessToken);
-                    navigate("/");
                     const decoded: DecodedToken = jwtDecode(res.data.data.accessToken);
                     console.log(decoded)
+
                     Swal.fire({
                         title: `Welcome ${decoded.email}`,
                         confirmButtonText: "Go to Portal",
+                    }).then(() => {
+                        navigate("/");
                     });
                 }
             })
