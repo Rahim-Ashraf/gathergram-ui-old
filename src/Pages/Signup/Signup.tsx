@@ -5,54 +5,47 @@ import apple from '../../assets/apple-icon.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from "react-hook-form";
 import ReactFlagsSelect from "react-flags-select";
-import { E164Number } from 'libphonenumber-js';
 
-type Inputs = {
-    email: string,
-    fullName: string,
-    country: string,
-    phoneNumber: string | undefined,
-    password: string,
-};
-
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 import { useState } from 'react'
 import { IoMdEyeOff } from 'react-icons/io'
 import { FaEye } from 'react-icons/fa'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+type Inputs = {
+    email: string,
+    fullName: string,
+    country: string,
+    phoneNumber: string,
+    password: string,
+};
+
 export default function Signup() {
     const [country, setCountry] = useState("CA");
-    const [phone, setPhone] = useState<E164Number | undefined>();
     const [showPass, setShowPass] = useState(true);
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = data => {
-        data.phoneNumber = phone?.slice(1);
         data.country = country;
-        console.log(data);
 
-        axios.post("https://jellyfish-app-sjgrf.ondigitalocean.app/auth/register",
-            {
-                fullName: "Abbb",
-                email: "user@example.com",
-                phoneNumber: "2002000000",
-                password: "????????"
-            }
-        )
+        axios.post("https://jellyfish-app-sjgrf.ondigitalocean.app/auth/register", data)
             .then(res => {
                 if (res.data) {
-                    console.log(res.data);
+                    localStorage.removeItem("accessToken");
+                    localStorage.setItem("accessToken", res.data.data.accessToken);
                     navigate("/");
-                    Swal.fire(`Welcome ${res.data?.user}`);
+                    Swal.fire({
+                        title: `Welcome ${data.fullName}`,
+                        confirmButtonText: "Go to Portal",
+                    });
                 }
             })
             .catch(err => {
-                console.error(err);
-                Swal.fire(err.message);
+                console.error(err.response);
+                if (err.response.status === 409) {
+                    Swal.fire(err.response.data.message);
+                }
             })
     }
 
@@ -76,7 +69,6 @@ export default function Signup() {
                 <h2 className='text-3xl font-bold pb-2 mt-20'>Signup</h2>
                 <p className='pb-4'>Enter your details below to signup or sign in with existing account</p>
 
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control">
                         <label className="label">
@@ -98,14 +90,14 @@ export default function Signup() {
                             <span className="font-bold">Full Name</span>
                         </label>
                         <input placeholder='Enter your full name' {...register("fullName", {
-                            required: true,
-                            pattern: {
-                                value: /^.{4,50}$/,
-                                message: 'Name length shoud be 4 chars to 50 chars'
-                            }
+                            required: "Name is required",
+                            minLength: {
+                                value: 4,
+                                message: "Name must be at least 4 char",
+                            },
                         })} className="input input-bordered w-full" />
                         {errors.fullName && <span className='text-rose-600'>
-                            {errors.fullName.message || "This field is required"}</span>}
+                            {errors.fullName.message}</span>}
                     </div>
                     <div className="form-control pt-4 pb-2">
                         <label className="label">
@@ -120,15 +112,19 @@ export default function Signup() {
                         <label className="label">
                             <span className="font-bold">Mobile Number</span>
                         </label>
-                        <PhoneInput
-                            {...register("phoneNumber", { required: true })}
+                        <input
+                            {...register("phoneNumber", {
+                                required: 'Phone number is required',
+                                pattern: {
+                                    value: /^\(?([2-9][0-9]{2})\)?[-.● ]?([2-9][0-9]{2})[-.● ]?([0-9]{4})$/,
+                                    message: 'Invalid phone number format',
+                                }
+                            })}
+                            type='text'
                             placeholder="Enter phone number"
-                            defaultCountry="CA"
-                            value={phone}
-                            onChange={(e) => setPhone(e)}
                             className="input input-bordered" />
                         {errors.phoneNumber && <span className='text-rose-600'>
-                            {errors.phoneNumber.message || "This field is required"}</span>}
+                            {errors.phoneNumber.message}</span>}
                     </div>
                     <div className="form-control pt-4 pb-2">
                         <label>
@@ -140,7 +136,7 @@ export default function Signup() {
                             <span onClick={() => setShowPass(!showPass)} className="absolute right-2 top-4">{showPass ? <FaEye className="cursor-pointer w-10" /> : <IoMdEyeOff className="cursor-pointer w-10" />}</span>
                             <input
                                 {...register("password", {
-                                    required: true,
+                                    required: 'Password is required',
                                     pattern: {
                                         value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*#?&]{8,}$/,
                                         message: 'At least 8 chars, 1 capital, 1 symbol and 1 number'
@@ -151,7 +147,7 @@ export default function Signup() {
                                 className="input input-bordered w-full" />
                         </div>
                         {errors.password && <span className='text-rose-600'>
-                            {errors.password.message || "This field is required"}</span>}
+                            {errors.password.message}</span>}
 
                     </div>
                     <div className="form-control pt-4 pb-2">

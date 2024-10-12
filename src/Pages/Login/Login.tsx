@@ -10,11 +10,20 @@ import Swal from 'sweetalert2'
 import { useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import { IoMdEyeOff } from 'react-icons/io'
+import { jwtDecode } from "jwt-decode";
 
 type Inputs = {
     email: string,
     password: string,
 };
+
+type DecodedToken = {
+    email: string
+    event: string
+    exp: number
+    iat: number
+    sub: string
+}
 
 export default function Login() {
     const [showPass, setShowPass] = useState(true);
@@ -22,23 +31,28 @@ export default function Login() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = data => {
-        console.log(data);
-        axios.post("https://jellyfish-app-sjgrf.ondigitalocean.app/auth/login",
-            {
-                email: "user@example.com",
-                password: "????????"
-            }
-        )
+        axios.post("https://jellyfish-app-sjgrf.ondigitalocean.app/auth/login", data)
             .then(res => {
-                if (res.data) {
-                    console.log(res.data);
+                if (res.data.data) {
+                    localStorage.removeItem("accessToken");
+                    localStorage.setItem("accessToken", res.data.data.accessToken);
                     navigate("/");
-                    Swal.fire(`Welcome ${res.data?.user}`);
+                    const decoded: DecodedToken = jwtDecode(res.data.data.accessToken);
+                    console.log(decoded)
+                    Swal.fire({
+                        title: `Welcome ${decoded.email}`,
+                        confirmButtonText: "Go to Portal",
+                    });
                 }
             })
             .catch(err => {
                 console.error(err)
-                Swal.fire(err.message);
+                if (err.response.status === 401) {
+                    Swal.fire({
+                        title: err.response.data.message,
+                        confirmButtonText: "Try again",
+                    });
+                }
             })
     }
 
@@ -62,14 +76,10 @@ export default function Login() {
                         </label>
                         <input placeholder='Enter your email'
                             {...register("email", {
-                                required: true,
-                                pattern: {
-                                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-                                    message: 'Invalid email format'
-                                }
+                                required: "Email is required",
                             })} className="input input-bordered w-full" />
                         {errors.email && <span className='text-rose-600'>
-                            {errors.email.message || "This field is required"}</span>}
+                            {errors.email.message}</span>}
                     </div>
                     <div className="form-control pt-4 pb-2">
                         <label className="label">
@@ -78,10 +88,12 @@ export default function Login() {
                         <div className="relative">
                             <span onClick={() => setShowPass(!showPass)} className="absolute right-2 top-4">{showPass ? <FaEye className="cursor-pointer w-10" /> : <IoMdEyeOff className="cursor-pointer w-10" />}</span>
                             <input
-                                {...register("password", { required: true })}
+                                {...register("password", { required: "Password is required" })}
                                 type={showPass ? "password" : "text"}
                                 placeholder="Enter password"
                                 className="input input-bordered w-full" />
+                            {errors.password &&
+                                <span className='text-rose-600'>{errors.password.message}</span>}
                         </div>
                     </div>
                     <div className="form-control mt-6">
