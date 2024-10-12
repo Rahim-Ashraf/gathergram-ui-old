@@ -5,6 +5,7 @@ import event from "./assets/event-icon.png";
 import Features from "./components/Features/Features";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
 import Pricing from "./components/Pricing/Pricing";
+import Reviews from "./components/Reviews/Reviews";
 
 
 export default function App() {
@@ -45,6 +46,7 @@ export default function App() {
       <Features />
       <HowItWorks />
       <Pricing />
+      <Reviews />
     </div>
   )
 }

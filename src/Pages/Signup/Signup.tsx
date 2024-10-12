@@ -2,9 +2,60 @@ import loginImage from '../../assets/login-pic.png'
 import google from '../../assets/google-icon.png'
 import facebook from '../../assets/facebook-icon.png'
 import apple from '../../assets/apple-icon.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useForm, SubmitHandler } from "react-hook-form";
+import ReactFlagsSelect from "react-flags-select";
+import { E164Number } from 'libphonenumber-js';
+
+type Inputs = {
+    email: string,
+    fullName: string,
+    country: string,
+    phoneNumber: string | undefined,
+    password: string,
+};
+
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+import { useState } from 'react'
+import { IoMdEyeOff } from 'react-icons/io'
+import { FaEye } from 'react-icons/fa'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Signup() {
+    const [country, setCountry] = useState("CA");
+    const [phone, setPhone] = useState<E164Number | undefined>();
+    const [showPass, setShowPass] = useState(true);
+    const navigate = useNavigate();
+
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const onSubmit: SubmitHandler<Inputs> = data => {
+        data.phoneNumber = phone?.slice(1);
+        data.country = country;
+        console.log(data);
+
+        axios.post("https://jellyfish-app-sjgrf.ondigitalocean.app/auth/register",
+            {
+                fullName: "Abbb",
+                email: "user@example.com",
+                phoneNumber: "2002000000",
+                password: "????????"
+            }
+        )
+            .then(res => {
+                if (res.data) {
+                    console.log(res.data);
+                    navigate("/");
+                    Swal.fire(`Welcome ${res.data?.user}`);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                Swal.fire(err.message);
+            })
+    }
+
     return (
         <div className="grid grid-cols-2 max-w-screen-xl mx-auto">
             <div className='relative'>
@@ -22,34 +73,86 @@ export default function Signup() {
                     <input type="radio" name='userType' value="brideGrom" id='brideGrom' className='accent-[#F5169C]' />
                     <label htmlFor="brideGrom" className='font-semibold pl-2'>I am Bride/Grom</label>
                 </div>
-                <h2 className='text-3xl font-bold pb-2 mt-20'>Get Started </h2>
-                <p className='pb-4'>Enter your email address below to login to existing account or <br />
-                    sign up with new account.</p>
-                <form>
+                <h2 className='text-3xl font-bold pb-2 mt-20'>Signup</h2>
+                <p className='pb-4'>Enter your details below to signup or sign in with existing account</p>
+
+
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control">
                         <label className="label">
                             <span className="font-bold">Email Address</span>
                         </label>
-                        <input type="email" placeholder="Enter email" className="input input-bordered" required />
+                        <input placeholder='Enter your email'
+                            {...register("email", {
+                                required: true,
+                                pattern: {
+                                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                                    message: 'Invalid email format'
+                                }
+                            })} className="input input-bordered w-full" />
+                        {errors.email && <span className='text-rose-600'>
+                            {errors.email.message || "This field is required"}</span>}
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="font-bold">Full Name</span>
+                        </label>
+                        <input placeholder='Enter your full name' {...register("fullName", {
+                            required: true,
+                            pattern: {
+                                value: /^.{4,50}$/,
+                                message: 'Name length shoud be 4 chars to 50 chars'
+                            }
+                        })} className="input input-bordered w-full" />
+                        {errors.fullName && <span className='text-rose-600'>
+                            {errors.fullName.message || "This field is required"}</span>}
                     </div>
                     <div className="form-control pt-4 pb-2">
                         <label className="label">
                             <span className="font-bold">Region</span>
                         </label>
-                        <input type="password" className="input input-bordered" required />
+                        <ReactFlagsSelect
+                            selected={country}
+                            onSelect={(code) => setCountry(code)}
+                        />
                     </div>
                     <div className="form-control pt-4 pb-2">
                         <label className="label">
                             <span className="font-bold">Mobile Number</span>
                         </label>
-                        <input type="password" className="input input-bordered" required />
+                        <PhoneInput
+                            {...register("phoneNumber", { required: true })}
+                            placeholder="Enter phone number"
+                            defaultCountry="CA"
+                            value={phone}
+                            onChange={(e) => setPhone(e)}
+                            className="input input-bordered" />
+                        {errors.phoneNumber && <span className='text-rose-600'>
+                            {errors.phoneNumber.message || "This field is required"}</span>}
                     </div>
                     <div className="form-control pt-4 pb-2">
                         <label>
                             <span className="font-bold">Password</span>
                             <p className='pb-1'>Must be at least 6 characters</p>
                         </label>
-                        <input type="password" placeholder="Enter password" className="input input-bordered" required />
+
+                        <div className="relative">
+                            <span onClick={() => setShowPass(!showPass)} className="absolute right-2 top-4">{showPass ? <FaEye className="cursor-pointer w-10" /> : <IoMdEyeOff className="cursor-pointer w-10" />}</span>
+                            <input
+                                {...register("password", {
+                                    required: true,
+                                    pattern: {
+                                        value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                                        message: 'At least 8 chars, 1 capital, 1 symbol and 1 number'
+                                    }
+                                })}
+                                type={showPass ? "password" : "text"}
+                                placeholder="Enter password"
+                                className="input input-bordered w-full" />
+                        </div>
+                        {errors.password && <span className='text-rose-600'>
+                            {errors.password.message || "This field is required"}</span>}
+
                     </div>
                     <div className="form-control pt-4 pb-2">
                         <h6>
@@ -57,7 +160,7 @@ export default function Signup() {
                         </h6>
                     </div>
                     <div className="form-control mt-6">
-                        <button className="bg-[#F5169C] w-full rounded-lg p-4 text-white font-bold">Sign up</button>
+                        <input type='submit' value="Sign up" className="bg-[#F5169C] w-full rounded-lg p-4 text-white font-bold" />
                     </div>
                 </form>
                 <div className="divider max-w-40 mx-auto py-8">or</div>
