@@ -1,4 +1,4 @@
-import checkIcon from '../../assets/Check-icon.png';
+import checkIcon from '/assets/Check-icon.png';
 
 export default function Feature({ text }: { text: string }) {
     return (

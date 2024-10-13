@@ -1,7 +1,7 @@
 import Hero from "./components/Hero/Hero";
 import Navbar from "./components/Navbar/Navbar";
-import connect from "./assets/connect-icon.png";
-import event from "./assets/event-icon.png";
+import connect from "/assets/connect-icon.png";
+import event from "/assets/event-icon.png";
 import Features from "./components/Features/Features";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
 import Pricing from "./components/Pricing/Pricing";
@@ -9,6 +9,7 @@ import Reviews from "./components/Reviews/Reviews";
 import Questions from "./components/Questions/Questions";
 import WeddingPlan from "./components/WeddingPlan/WeddingPlan";
 import ContactUs from "./components/ContactUs/ContactUs";
+import Footer from "./components/Footer/Footer";
 
 
 export default function App() {
@@ -53,6 +54,7 @@ export default function App() {
       <Questions></Questions>
       <WeddingPlan />
       <ContactUs />
+      <Footer />
     </div>
   )
 }

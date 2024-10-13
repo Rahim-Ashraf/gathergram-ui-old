@@ -1,7 +1,8 @@
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
-import Review from '../Reusables/Review'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import star from '/assets/Star.png'
 
 export default function Reviews() {
     const swiper = useSwiper();
@@ -27,23 +28,88 @@ export default function Reviews() {
                     slidesPerView={4}
                 >
                     <SwiperSlide>
-                        <Review bgUrl={"./assets/review-bg1.png"} name="Alisa Hester" title="PM, Hourglass" agency="Web Design Agency" />
+                        <div className={`p-3 text-white bg-[url('/assets/review-bg1.png')] bg-cover h-80 flex justify-center items-end`}>
+                            <div className='backdrop-blur border border-gray-200 p-3 w-full bg-[#4c412b20]'>
+                                <div className='flex gap-1 items-center'>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                </div>
+                                <h4 className='text-xl font-bold'>Alisa Hester</h4>
+                                <h6 className='font-bold'>PM, Hourglass</h6>
+                                <h6>Web Design Agency</h6>
+                            </div>
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Review bgUrl={"./assets/review-bg2.png"} name="Rich Wilson" title="COO, Command+R" agency="Web Development Agency" />
+                        <div className={`p-3 text-white bg-[url('/assets/review-bg2.png')] bg-cover h-80 flex justify-center items-end`}>
+                            <div className='backdrop-blur border border-gray-200 p-3 w-full bg-[#4c412b20]'>
+                                <div className='flex gap-1 items-center'>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                </div>
+                                <h4 className='text-xl font-bold'>Rich Wilson</h4>
+                                <h6 className='font-bold'>COO, Command+R</h6>
+                                <h6>Web Development Agency</h6>
+                            </div>
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Review bgUrl={"./assets/review-bg3.png"} name="Annie Stanley" title="Designer, Catalog" agency="UX Agency" />
+                        <div className={`p-3 text-white bg-[url('/assets/review-bg3.png')] bg-cover h-80 flex justify-center items-end`}>
+                            <div className='backdrop-blur border border-gray-200 p-3 w-full bg-[#4c412b20]'>
+                                <div className='flex gap-1 items-center'>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                </div>
+                                <h4 className='text-xl font-bold'>Annie Stanley</h4>
+                                <h6 className='font-bold'>Designer, Catalog</h6>
+                                <h6>UX Agency</h6>
+                            </div>
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Review bgUrl={"./assets/review-bg4.png"} name="Johnny Bell" title="PM, Sisyphus" agency="Machine Learning" />
+                        <div className={`p-3 text-white bg-[url('/assets/review-bg4.png')] bg-cover h-80 flex justify-center items-end`}>
+                            <div className='backdrop-blur border border-gray-200 p-3 w-full bg-[#4c412b20]'>
+                                <div className='flex gap-1 items-center'>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                </div>
+                                <h4 className='text-xl font-bold'>Johnny Bell</h4>
+                                <h6 className='font-bold'>PM, Sisyphus</h6>
+                                <h6>Machine Learning</h6>
+                            </div>
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <Review bgUrl={"./assets/review-bg5.png"} name="Mia Ward" title="Fullstack Dev, Quotient" agency="Performance Marketing" />
+                        <div className={`p-3 text-white bg-[url('/assets/review-bg5.png')] bg-cover h-80 flex justify-center items-end`}>
+                            <div className='backdrop-blur border border-gray-200 p-3 w-full bg-[#4c412b20]'>
+                                <div className='flex gap-1 items-center'>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                    <div className='w-4'><img src={star} alt="" /></div>
+                                </div>
+                                <h4 className='text-xl font-bold'>Mia Ward</h4>
+                                <h6 className='font-bold'>Fullstack Dev, Quotient</h6>
+                                <h6>Performance Marketing</h6>
+                            </div>
+                        </div>
                     </SwiperSlide>
-                    <div className='pt-4'>
-                        <button onClick={() => swiper.slidePrev()} className='btn btn-primary'>prev</button>
-                        <button onClick={() => swiper.slideNext()} className='btn btn-primary'>next</button>
+                    <div className='pt-4 flex gap-4'>
+                        <button onClick={() => swiper.slidePrev()} className='p-4 bg-white rounded-full'><FaArrowLeft /></button>
+                        <button onClick={() => swiper.slideNext()} className='p-4 bg-white rounded-full'><FaArrowRight /></button>
                     </div>
                 </Swiper>
             </div>

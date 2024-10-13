@@ -1,10 +1,10 @@
-import featuredIcon1 from '../../assets/Featured-icon1.png';
-import featuredIcon2 from '../../assets/Featured-icon2.png';
-import featuredIcon3 from '../../assets/Featured-icon3.png';
-import featuredIcon4 from '../../assets/Featured-icon4.png';
-import featuredIcon5 from '../../assets/Featured-icon5.png';
-import featuredIcon6 from '../../assets/Featured-icon6.png';
-import avatarGroup from '../../assets/Avatar-group.png';
+import featuredIcon1 from '/assets/Featured-icon1.png';
+import featuredIcon2 from '/assets/Featured-icon2.png';
+import featuredIcon3 from '/assets/Featured-icon3.png';
+import featuredIcon4 from '/assets/Featured-icon4.png';
+import featuredIcon5 from '/assets/Featured-icon5.png';
+import featuredIcon6 from '/assets/Featured-icon6.png';
+import avatarGroup from '/assets/Avatar-group.png';
 
 export default function Questions() {
     return (

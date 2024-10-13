@@ -1,8 +1,8 @@
-import loginImage from '../../assets/login-pic.png'
-import loginLogo from '../../assets/login-logo.png'
-import google from '../../assets/google-icon.png'
-import facebook from '../../assets/facebook-icon.png'
-import apple from '../../assets/apple-icon.png'
+import loginImage from '/assets/login-pic.png'
+import loginLogo from '/assets/login-logo.png'
+import google from '/assets/google-icon.png'
+import facebook from '/assets/facebook-icon.png'
+import apple from '/assets/apple-icon.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from 'axios'

@@ -1,5 +1,5 @@
 import { FaArrowRight } from 'react-icons/fa'
-import rectangle2 from '../../assets/Rectangle2.png'
+import rectangle2 from '/assets/Rectangle2.png'
 
 export default function WeddingPlan() {
     return (
