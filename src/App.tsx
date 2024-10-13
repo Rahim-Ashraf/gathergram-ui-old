@@ -7,6 +7,8 @@ import HowItWorks from "./components/HowItWorks/HowItWorks";
 import Pricing from "./components/Pricing/Pricing";
 import Reviews from "./components/Reviews/Reviews";
 import Questions from "./components/Questions/Questions";
+import WeddingPlan from "./components/WeddingPlan/WeddingPlan";
+import ContactUs from "./components/ContactUs/ContactUs";
 
 
 export default function App() {
@@ -49,6 +51,8 @@ export default function App() {
       <Pricing />
       <Reviews />
       <Questions></Questions>
+      <WeddingPlan />
+      <ContactUs />
     </div>
   )
 }
