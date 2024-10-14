@@ -12,7 +12,7 @@ export default function Pricing() {
                     <h6>Annual billing</h6>
                     <button className="bg-gray-200 px-4 rounded-full">Save 20%</button>
                 </div>
-                <div className="flex justify-center gap-8 pt-8">
+                <div className="flex flex-col md:flex-row justify-center gap-8 pt-8">
                     <div className="shadow-xl rounded-lg border">
                         <div className="flex justify-between items-center py-4 px-6">
                             <div>
@@ -83,7 +83,6 @@ export default function Pricing() {
                             <button className="w-full bg-[#EB44B2] px-4 py-2 text-white font-bold rounded-lg">Get started</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -1,5 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "/assets/gathergram-logo.png"
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 
 export default function Navbar() {
@@ -11,6 +13,28 @@ export default function Navbar() {
         <NavLink to="/" className="">About</NavLink>
         <NavLink to="/" className="">Contact</NavLink>
     </>
+
+    const [isToken, setIsToken] = useState("");
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken");
+        setIsToken(token || "");
+    }, []);
+    const handleLogout = () => {
+        Swal.fire({
+            title: "Want to logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Logout!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("accessToken");
+                setIsToken("");
+            }
+        });
+
+    }
 
     return (
         <div className="navbar bg-base-100 px-0 max-w-screen-xl mx-auto ">
@@ -44,7 +68,7 @@ export default function Navbar() {
                     <div className="w-4 h-4">
                         <img src={logo} alt="logo" className="w-full" />
                     </div>
-                    <h2 className="text-xl">GatherGram</h2>
+                    <h2 className="text-xl hidden md:block">GatherGram</h2>
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -53,7 +77,11 @@ export default function Navbar() {
                 </div>
             </div>
             <div className="navbar-end gap-4">
-                <Link to="/login" className="btn btn-sm btn-ghost rounded-full">Sign in</Link>
+                {
+                    isToken ? <button onClick={handleLogout} className="px-4 py-2 text-white font-bold rounded-lg bg-rose-600">Log out</button>
+                        :
+                        <Link to="/login" className="btn btn-sm btn-ghost rounded-full">Sign in</Link>
+                }
                 <Link to="/" className="px-6 py-2 bg-black rounded-full text-white font-semibold">Get started</Link>
             </div>
         </div>

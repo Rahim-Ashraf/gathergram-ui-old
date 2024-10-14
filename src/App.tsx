@@ -26,12 +26,12 @@ export default function App() {
       </div>
 
       <div className="bg-[#212121]">
-        <div className="max-w-screen-xl mx-auto py-8 flex items-center gap-16 text-white">
-          <h4 className="text-2xl font-semibold w-1/2">
+        <div className="max-w-screen-xl mx-auto py-8 flex flex-col md:flex-row items-center gap-16 text-white">
+          <h4 className="text-2xl font-semibold md:w-1/2">
             "Powerful tool to manage your wedding, engage guests, and celebrate together effortlessly.".
           </h4>
-          <div className="flex w-1/2">
-            <div className="flex gap-4 items-center w-1/2">
+          <div className="flex md:w-1/2">
+            <div className="flex gap-4 items-center md:w-1/2">
               <div className="bg-[#EB44B2] w-16 p-4 rounded-full">
                 <img src={connect} alt="" />
               </div>

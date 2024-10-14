@@ -8,8 +8,8 @@ export default function Reviews() {
     const swiper = useSwiper();
 
     return (
-        <div className="bg-pink-50 p-20">
-            <div className="flex justify-between items-start gap-4">
+        <div className="bg-pink-50 p-8 md:p-20">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                 <div>
                     <h4 className='text-2xl font-bold pb-4'>Don't just take our word for it</h4>
                     <p>Hear from some of our amazing customers who are building faster.</p>
@@ -25,7 +25,12 @@ export default function Reviews() {
                     navigation
                     loop
                     spaceBetween={40}
-                    slidesPerView={4}
+                    breakpoints={{
+                        940: {
+                            width: 768,
+                            slidesPerView: 3,
+                        },
+                    }}
                 >
                     <SwiperSlide>
                         <div className={`p-3 text-white bg-[url('/assets/review-bg1.png')] bg-cover h-80 flex justify-center items-end`}>

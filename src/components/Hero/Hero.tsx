@@ -7,8 +7,8 @@ import user4 from '/assets/user4.png'
 export default function Hero() {
   return (
     <div className="max-w-screen-xl mx-auto grid grid-cols-2 gap-20 py-20">
-      <div className="col-span-1 space-y-8">
-        <h1 className="text-6xl font-bold">“Plan, Share, and Celebrate Your Big Day in One Place”</h1>
+      <div className="col-span-2 md:col-span-1 space-y-8">
+        <h1 className="text-4xl md:text-6xl font-bold">“Plan, Share, and Celebrate Your Big Day in One Place”</h1>
         <p>“Create unforgettable memories with a personalized wedding platform for you and your guests.”</p>
         <div className='flex gap-2'>
           <input type="text" name="" placeholder='Enter your email address' className='input bg-gray-100 rounded-full' />
@@ -23,8 +23,8 @@ export default function Hero() {
           <p className='pl-4'>+2K People Joined!</p>
         </div>
       </div>
-      <div className="col-span-1">
-        <div className='py-4 px-24'>
+      <div className="col-span-2 md:col-span-1">
+        <div className='py-4 px-8 md:px-24'>
           <img className='w-full' src={recangle} alt="Hero" />
         </div>
       </div>

@@ -9,7 +9,7 @@ export default function ContactUs() {
             <h6 className="font-bold text-[#F5169C]">Contact us</h6>
             <h4 className="text-xl font-bold">We'd love to hear from you</h4>
             <p className='pb-2'>Our friendly team is always here to chat.</p>
-            <div className="flex gap-6">
+            <div className="flex flex-col md:flex-row gap-6">
                 <div className="space-y-2 px-4 py-4 bg-pink-50">
                     <div className="w-12 pb-8">
                         <img src={chat} alt="Icon" />
