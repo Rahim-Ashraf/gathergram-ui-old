@@ -158,7 +158,7 @@ export default function Signup() {
                         </h6>
                     </div>
                     <div className="form-control mt-6">
-                        <input type='submit' value="Sign up" className="bg-[#F5169C] w-full rounded-lg p-4 text-white font-bold" />
+                        <input type='submit' value="Sign up" className="cursor-pointer bg-[#F5169C] w-full rounded-lg p-4 text-white font-bold" />
                     </div>
                 </form>
                 <div className="divider max-w-40 mx-auto py-8">or</div>

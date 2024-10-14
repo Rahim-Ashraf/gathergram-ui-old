@@ -99,7 +99,7 @@ export default function Login() {
                         </div>
                     </div>
                     <div className="form-control mt-6">
-                        <button className="bg-[#F5169C] w-full rounded-lg p-4 text-white font-bold">Get Started</button>
+                        <input type='submit' value="Get Started" className="cursor-pointer bg-[#F5169C] w-full rounded-lg p-4 text-white font-bold" />
                     </div>
                 </form>
                 <div className="divider max-w-40 mx-auto py-8">or</div>
