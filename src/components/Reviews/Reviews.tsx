@@ -5,7 +5,6 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import star from '/assets/Star.png'
 
 export default function Reviews() {
-    const swiper = useSwiper();
 
     return (
         <div className="bg-pink-50 p-8 md:p-20">
@@ -113,11 +112,24 @@ export default function Reviews() {
                         </div>
                     </SwiperSlide>
                     <div className='pt-4 flex gap-4'>
-                        <button onClick={() => swiper.slidePrev()} className='p-4 bg-white rounded-full'><FaArrowLeft /></button>
-                        <button onClick={() => swiper.slideNext()} className='p-4 bg-white rounded-full'><FaArrowRight /></button>
+                        <SlidePrev />
+                        <SlideNext />
                     </div>
                 </Swiper>
             </div>
         </div>
     )
 }
+
+const SlidePrev = () => {
+    const swiper = useSwiper();
+    return (
+        <button onClick={() => swiper.slidePrev()} className='p-4 bg-white rounded-full'><FaArrowLeft /></button>
+    );
+};
+const SlideNext = () => {
+    const swiper = useSwiper();
+    return (
+        <button onClick={() => swiper.slideNext()} className='p-4 bg-white rounded-full'><FaArrowRight /></button>
+    );
+};
